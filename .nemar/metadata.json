@@ -1,9 +1,9 @@
 {
   "version": "2.0",
-  "dataset_id": "on003801",
-  "source": "openneuro",
-  "source_id": "ds003801",
+  "pipeline_stage": "validated",
   "title": "Neural Tracking to go",
+  "license": "CC0",
+  "dataset_type": "raw",
   "authors": {
     "Lisa Straetmans": {},
     "Bjoern Holtze": {},
@@ -11,14 +11,58 @@
     "Manuela Jaeger": {},
     "Bojana Mirkovic": {}
   },
-  "license": "CC0",
-  "dataset_type": "raw",
   "related_identifiers": [
     {
       "identifier": "10.18112/openneuro.ds003801.v1.0.0",
       "identifier_type": "DOI",
-      "relation_type": "IsIdenticalTo"
+      "relation_type": "IsDerivedFrom"
+    },
+    {
+      "identifier": "https://github.com/nemarDatasets/on003801",
+      "identifier_type": "URL",
+      "relation_type": "IsDescribedBy"
+    },
+    {
+      "identifier": "https://nemar.org/dataexplorer/detail?dataset_id=on003801",
+      "identifier_type": "URL",
+      "relation_type": "IsDescribedBy"
     }
   ],
-  "pipeline_stage": "seeded"
+  "modalities": [
+    "eeg"
+  ],
+  "resource_type_specific": "EEG Dataset",
+  "sizes": [
+    "1.2 GB (41 files)"
+  ],
+  "formats": [
+    ".fdt",
+    ".json",
+    ".md",
+    ".set",
+    ".tsv",
+    ".yml"
+  ],
+  "description": "A mobile EEG dataset investigating auditory attention and neural tracking during competing speech tasks. Twenty participants performed a two-competing speaker paradigm under two conditions: seated and walking indoors. The study examines how attention is modulated by environmental salient events encountered during locomotion, providing insights into the neural mechanisms of selective attention in naturalistic, dynamic environments.",
+  "keywords": [
+    {
+      "term": "EEG"
+    },
+    {
+      "term": "auditory attention"
+    },
+    {
+      "term": "neural tracking"
+    },
+    {
+      "term": "mobile neuroimaging"
+    },
+    {
+      "term": "competing speech"
+    },
+    {
+      "term": "selective attention"
+    }
+  ],
+  "source_hash": "41969504bae6b56161369abd6b0f9dcbbd44c55d5c24c055b0aa6b74304361ed"
 }
