@@ -6,29 +6,29 @@ Attention was disrupted by environmental salient eventsfrom in front of the part
 
 - Lisa Straetmans (Sep, 2021)
 
-## NEMAR curation changes (2026-05-21)
+## NEMAR curation changes (2026-05-21, revised 2026-05-27)
 
-BIDS validator: 21 errors + 944 warnings → 0 errors + 661 warnings. Raw `.set`/`.fdt` binary payloads unchanged.
+The BIDS validator went from 21 errors + 944 warnings to 0 errors + 662 warnings. None of the raw `.set` or `.fdt` files were modified; every change is to a text sidecar.
 
-### `dataset_description.json`
-- `BIDSVersion`: `"v2.0"` → `"1.8.0"`. Why: the previous value carried a non-canonical `v` prefix and is below the validator's recognised-version floor; the validator fired `UNKNOWN_BIDS_VERSION` on the dataset root.
-- Added `DatasetType: "raw"`. Why: BIDS-validator otherwise infers a derivative-rules cascade when `DatasetType` is missing alongside `GeneratedBy`, producing spurious warnings.
-- Added `GeneratedBy: [{Name: "nemar-cli", Version: "0.8.8", CodeURL: "https://github.com/nemar-org/nemar-cli"}]`. Why: records the NEMAR rehost step in the dataset's provenance chain.
+**Events sidecar consolidated at the dataset root (`task-NeuralTrackingToGo_events.json`)**
+- A single root-level events sidecar was created and the 20 per-recording `sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_events.json` files were removed. The per-recording sidecars were byte-identical to each other, so one root sidecar covers all 20 recordings via BIDS inheritance and avoids having to re-edit twenty identical files.
+- The `value` column is declared as free-form text rather than as an enumerated set. The previous per-recording sidecar listed only three allowed labels (`no`, `play`, `yes`, all button presses) under `value.Levels`, but the actual event tables contain about thirty distinct labels (`start_exp`, `rest_sit`, `rest_stand`, `start_sound1_sit`, `stop_sound1_walk`, and so on). Every label outside the three-item enum was being rejected as the wrong type. Dropping the closed enum lets every observed label through. The trial-type labels remain declared under `trial_type.Levels`, unchanged from the original sidecar.
+- The `sample` and `response_time` columns are declared with their BIDS-canonical types (`sample` as an integer sample index, `response_time` with `Units: "s"`) so the validator treats them as the documented standard columns rather than flagging them as undefined.
+- `onset` and `duration` were left undeclared on purpose. The BIDS built-in schema already fixes their units to seconds, and redeclaring them in a sidecar would trip a column-type-redefined warning.
 
-### `sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_electrodes.tsv` (20 files)
-- `git mv` to `sub-NNN/eeg/sub-NNN_electrodes.tsv` (dropped the `task-` entity). Why: electrode positions are subject-level per BIDS, not task-level; the entity-bearing filename fires `EXCESSIVE_ELECTRODE_SPECIFICITY` on every recording.
+**Electrode files renamed (`sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_electrodes.tsv`, 20 files)**
+- Each file was renamed to `sub-NNN/eeg/sub-NNN_electrodes.tsv`, dropping the `task-` entity from the filename. Electrode positions are a property of the subject, not of a particular task, and the entity-bearing filename was firing an excessive-specificity warning on every recording. File contents are unchanged; only the filename changed.
 
-### `sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_coordsystem.json` (20 files)
-- `git mv` to `sub-NNN/eeg/sub-NNN_coordsystem.json` (same rationale). Why: coordinate-system files are subject-level per BIDS; closes `EXCESSIVE_COORDSYSTEM_SPECIFICITY`. File contents unchanged.
+**Coordinate-system files renamed (`sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_coordsystem.json`, 20 files)**
+- Same rename pattern: each file became `sub-NNN/eeg/sub-NNN_coordsystem.json`. Coordinate-system metadata is subject-level per BIDS, so the `task-` entity does not belong in the filename. Contents are unchanged.
 
-### `sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_channels.tsv` (20 files)
-- `units` column: `microV` → `uV` for all 24 EEG rows in every file. Why: `microV` is not a BIDS-recognised unit string for microvolts; the canonical form is `uV` (or `µV`). The actual signal magnitudes are unchanged — only the textual unit label.
+**Channel tables (`sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_channels.tsv`, 20 files)**
+- The `units` column for the 24 EEG rows in each file was changed from `microV` to `uV`. `microV` is not a BIDS-recognised spelling for microvolts; the canonical forms are `uV` or `µV`. This is a textual unit label only; the recorded signal magnitudes are unchanged.
 
-### `task-NeuralTrackingToGo_events.json` (new, inheriting root sidecar)
-- Created at the dataset root, replacing the 20 byte-identical per-recording `_events.json` files (now removed). One root sidecar inherits to all recordings.
-- Declares the non-canonical `value` column as free-form text. Why: the per-recording `value` column contains string event labels (`start_exp`, `play`, `no`, `yes`, `rest_sit`, `rest_stand`, `start_sound{1-6}_{sit,walk}`, `stop_sound{1-6}_{sit,walk}`, …) — 30 distinct labels in total. The old per-recording sidecar declared only 3 of those labels in `value.Levels` (`no` / `play` / `yes`, all button presses), causing the BIDS-validator to reject every other label as the wrong type (20× `TSV_VALUE_INCORRECT_TYPE:value @ msg='start_exp'` errors, one per recording). Dropping the `Levels` enum lets every observed label through. The 27 trial-type labels also remain declared under `trial_type.Levels` (unchanged from the original sidecar).
-- Declares `sample` (BIDS column, was undocumented) and re-declares `response_time` with `Units: "s"` (the per-recording sidecar omitted the unit) so the canonical schema applies.
-- `onset` / `duration` are intentionally NOT redeclared — the BIDS built-in schema already enforces `Units: "s"` and re-declaring them with a free-form `Description` would fire `TSV_COLUMN_TYPE_REDEFINED`.
+**Dataset description (`dataset_description.json`)**
+- Added `DatasetType: "raw"` so the dataset is validated against the raw-data rules rather than the derivative rules.
+- Updated `BIDSVersion` from `"v2.0"` to `"1.11.1"` (the version the current validator checks against). The original value carried a non-canonical `v` prefix and sat below the validator's recognised-version floor.
+- `GeneratedBy` was left absent, exactly as the source published it; nothing was added there.
 
-### `sub-NNN/eeg/sub-NNN_task-NeuralTrackingToGo_events.json` (20 per-recording sidecars)
-- Removed. Why: every per-recording file was byte-identical; the new inheriting root `task-NeuralTrackingToGo_events.json` covers all 20 recordings via BIDS inheritance. Removing the redundant per-recording copies also avoided having to re-edit all 20 to drop the wrong `value.Levels`.
+**Remaining warnings (662), left on purpose**
+- These are all "recommended but missing" fields that need information from the study, lab, or equipment that isn't in the dataset (for example: `Manufacturer`, `CapManufacturer`, `CapManufacturersModelName`, `EEGGround`, `HeadCircumference`, `HardwareFilters`, `SoftwareVersions`, `DeviceSerialNumber`, `Instructions`, `SubjectArtefactDescription`, `CogAtlasID`, `CogPOID`, the fiducial- and anatomical-landmark coordinate fields in the coordinate-system sidecars, and `GeneratedBy` at the dataset root). They were left blank rather than filled with guesses.
