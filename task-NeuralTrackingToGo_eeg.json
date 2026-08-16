@@ -1,0 +1,6 @@
+{
+  "EEGPlacementScheme": "10-10",
+  "MISCChannelCount": 0,
+  "TriggerChannelCount": 0,
+  "TaskDescription": "Mobile EEG auditory attention experiment with a two-competing-speaker paradigm. Subjects either sat on a chair or walked an indoor route while listening to narrated sounds; attention was disrupted by environmental salient events from in front of the participant."
+}
