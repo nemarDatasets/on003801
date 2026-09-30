@@ -2,6 +2,7 @@
   "version": "2.0",
   "pipeline_stage": "validated",
   "title": "Neural Tracking to go",
+  "description": "A mobile EEG dataset of auditory attention from 20 participants performing a two-competing-speaker paradigm. Participants either sat on a chair or walked an indoor route while attending to one of two speakers. Salient environmental events presented from in front of the participant were used to disrupt attention, allowing neural tracking of speech to be studied in realistic, mobile conditions.",
   "license": "CC0",
   "dataset_type": "raw",
   "authors": {
@@ -11,6 +12,28 @@
     "Manuela Jaeger": {},
     "Bojana Mirkovic": {}
   },
+  "keywords": [
+    {
+      "term": "EEG"
+    },
+    {
+      "term": "auditory attention"
+    },
+    {
+      "term": "mobile EEG"
+    },
+    {
+      "term": "neural tracking"
+    },
+    {
+      "term": "competing speakers"
+    },
+    {
+      "term": "Walking",
+      "subject_scheme": "MeSH",
+      "value_uri": "http://id.nlm.nih.gov/mesh/D016138"
+    }
+  ],
   "related_identifiers": [
     {
       "identifier": "10.18112/openneuro.ds003801.v1.0.0",
@@ -23,17 +46,17 @@
       "relation_type": "IsDescribedBy"
     },
     {
-      "identifier": "https://nemar.org/dataexplorer/detail?dataset_id=on003801",
+      "identifier": "https://nemar.org/dataset/on003801",
       "identifier_type": "URL",
       "relation_type": "IsDescribedBy"
     }
   ],
+  "resource_type_specific": "EEG Dataset",
   "modalities": [
     "eeg"
   ],
-  "resource_type_specific": "EEG Dataset",
   "sizes": [
-    "1.2 GB (41 files)"
+    "1.15 GB (41 files)"
   ],
   "formats": [
     ".fdt",
@@ -43,26 +66,6 @@
     ".tsv",
     ".yml"
   ],
-  "description": "A mobile EEG dataset investigating auditory attention and neural tracking during competing speech tasks. Twenty participants performed a two-competing speaker paradigm under two conditions: seated and walking indoors. The study examines how attention is modulated by environmental salient events encountered during locomotion, providing insights into the neural mechanisms of selective attention in naturalistic, dynamic environments.",
-  "keywords": [
-    {
-      "term": "EEG"
-    },
-    {
-      "term": "auditory attention"
-    },
-    {
-      "term": "neural tracking"
-    },
-    {
-      "term": "mobile neuroimaging"
-    },
-    {
-      "term": "competing speech"
-    },
-    {
-      "term": "selective attention"
-    }
-  ],
+  "methods_description": "Mobile EEG was recorded during a two-competing-speaker auditory attention task, in which participants were either seated or walking an indoor route. Salient environmental events were presented from in front of the participant to disrupt attention.",
   "source_hash": "41969504bae6b56161369abd6b0f9dcbbd44c55d5c24c055b0aa6b74304361ed"
 }
