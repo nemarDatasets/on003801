@@ -2,7 +2,8 @@
   "version": "2.0",
   "pipeline_stage": "validated",
   "title": "Neural Tracking to go",
-  "description": "A mobile EEG dataset of auditory attention from 20 participants performing a two-competing-speaker paradigm. Participants either sat on a chair or walked an indoor route while attending to one of two speakers. Salient environmental events presented from in front of the participant were used to disrupt attention, allowing neural tracking of speech to be studied in realistic, mobile conditions.",
+  "description": "A mobile EEG dataset of auditory attention recorded from 20 participants. Using a two-competing-speaker paradigm, participants either sat on a chair or walked a route indoors while attending to one of the speakers. Attention was disrupted by salient environmental events presented from in front of the participant, allowing the study of neural tracking of speech under realistic, mobile conditions.",
+  "methods_description": "Mobile EEG was recorded from 20 participants (24 EEG channels) during a two-competing-speaker auditory attention task, performed while sitting or walking a route indoors. Salient environmental events from in front of the participant served as attention disruptors.",
   "license": "CC0",
   "dataset_type": "raw",
   "authors": {
@@ -17,10 +18,10 @@
       "term": "EEG"
     },
     {
-      "term": "auditory attention"
+      "term": "mobile EEG"
     },
     {
-      "term": "mobile EEG"
+      "term": "auditory attention"
     },
     {
       "term": "neural tracking"
@@ -29,9 +30,12 @@
       "term": "competing speakers"
     },
     {
-      "term": "Walking",
+      "term": "walking"
+    },
+    {
+      "term": "Attention",
       "subject_scheme": "MeSH",
-      "value_uri": "http://id.nlm.nih.gov/mesh/D016138"
+      "value_uri": "http://id.nlm.nih.gov/mesh/D001288"
     }
   ],
   "related_identifiers": [
@@ -66,6 +70,6 @@
     ".tsv",
     ".yml"
   ],
-  "methods_description": "Mobile EEG was recorded during a two-competing-speaker auditory attention task, in which participants were either seated or walking an indoor route. Salient environmental events were presented from in front of the participant to disrupt attention.",
-  "source_hash": "41969504bae6b56161369abd6b0f9dcbbd44c55d5c24c055b0aa6b74304361ed"
+  "resource_type_general": "Dataset",
+  "source_hash": "282defcc765bfad435e409e10d996dbbce812e895007f50c47f46fe47e955aef"
 }
