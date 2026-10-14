@@ -1,0 +1,44 @@
+{
+  "sample": {
+    "Description": "Event sample index (0-based, Python convention)."
+  },
+  "trial_type": {
+    "Description": "Upper-hierarchy categorical event label.",
+    "Levels": {
+      "start_exp": "beginning of experiment",
+      "rest_sit": "start of 1 minute of rest EEG sitting",
+      "rest_stand": "start of 1 minute of rest EEG standing",
+      "start_sound1_sit": "start of narrative 1 in sitting condition",
+      "start_sound1_walk": "start of narrative 1 in walking condition",
+      "stop_sound1_sit": "stop of narrative 1 in sitting condition",
+      "stop_sound1_walk": "stop of narrative 1 in walking condition",
+      "start_sound2_sit": "start of narrative 2 in sitting condition",
+      "start_sound2_walk": "start of narrative 2 in walking condition",
+      "stop_sound2_sit": "stop of narrative 2 in sitting condition",
+      "stop_sound2_walk": "stop of narrative 2 in walking condition",
+      "start_sound3_sit": "start of narrative 3 in sitting condition",
+      "start_sound3_walk": "start of narrative 3 in walking condition",
+      "stop_sound3_sit": "stop of narrative 3 in sitting condition",
+      "stop_sound3_walk": "stop of narrative 3 in walking condition",
+      "start_sound4_sit": "start of narrative 4 in sitting condition",
+      "start_sound4_walk": "start of narrative 4 in walking condition",
+      "stop_sound4_sit": "stop of narrative 4 in sitting condition",
+      "stop_sound4_walk": "stop of narrative 4 in walking condition",
+      "start_sound5_sit": "start of narrative 5 in sitting condition",
+      "start_sound5_walk": "start of narrative 5 in walking condition",
+      "stop_sound5_sit": "stop of narrative 5 in sitting condition",
+      "stop_sound5_walk": "stop of narrative 5 in walking condition",
+      "start_sound6_sit": "start of narrative 6 in sitting condition",
+      "start_sound6_walk": "start of narrative 6 in walking condition",
+      "stop_sound6_sit": "stop of narrative 6 in sitting condition",
+      "stop_sound6_walk": "stop of narrative 6 in walking condition"
+    }
+  },
+  "response_time": {
+    "Description": "Response time. Recorded column is all n/a for this dataset (button-press latencies were not collected).",
+    "Units": "s"
+  },
+  "value": {
+    "Description": "Free-form event label as recorded in the original acquisition. Includes button-press labels ('no', 'play', 'yes') and the categorical event labels also enumerated under `trial_type.Levels` ('start_exp', 'rest_sit', 'rest_stand', 'start_sound{1-6}_{sit,walk}', 'stop_sound{1-6}_{sit,walk}')."
+  }
+}
